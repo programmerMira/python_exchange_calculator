@@ -64,5 +64,3 @@ def api_root(first,second):
     response_object['data'] = calculator.substraction(first,second)
     return jsonify(response_object)
 #endregion
-
-app.run()
