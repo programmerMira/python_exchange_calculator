@@ -15,6 +15,12 @@ calculator = Calculations()
 # enable CORS
 CORS(app)
 
+@app.route('/', methods=['GET'])
+def hello():
+    response_object = {'status': 'success'}
+    response_object['data'] = "Start using server!"
+    return jsonify(response_object)
+
 #region get routes
 @app.route('/api/addition/<first>/<second>', methods=['GET'])
 def api_addition(first,second):
