@@ -1,8 +1,19 @@
-from flask import jsonify
-from main import app
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+
 from calcularions import Calculations
 
+# configuration
+DEBUG = True
+
+# instantiate the app
+app = Flask(__name__)
+app.config.from_object(__name__)
+
 calculator = Calculations()
+
+# enable CORS
+CORS(app)
 
 #region get routes
 @app.route('/api/addition/<first>/<second>', methods=['GET'])
@@ -44,5 +55,8 @@ def api_power(first,second):
 @app.route('/api/root/<first>/<second>', methods=['GET'])
 def api_root(first,second):
     response_object = {'status': 'success'}
-    response_object['data'] = calculator.root(first,second)
+    response_object['data'] = calculator.substraction(first,second)
     return jsonify(response_object)
+#endregion
+
+app.run()
