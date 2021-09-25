@@ -1,1 +1,1 @@
-web: gunicorn calculator-2021:app
+web: gunicorn main:app
