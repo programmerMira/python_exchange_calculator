@@ -25,7 +25,7 @@ def evaluateExpression(expression):
     """Evaluate an expression."""
     try:
         result = str(eval(expression, {}, {}))
-        request = requests.get("https://calculator-2021.herokuapp.com/")
+        request = requests.get("https://calculator-2021.herokuapp.com/",params={'expression':expression})
         if request.status_code==200:
             print(request.text)
     except Exception:
