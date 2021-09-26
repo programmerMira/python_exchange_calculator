@@ -17,12 +17,16 @@ CORS(app)
 
 @app.route('/', methods=['GET','POST'])
 def hello():
-    expression = request.get_json()
-    response_object = {'status': 'success'}
-    response_object['data'] = "Start using server!"
-    response_object['info'] = "/api/help for more details"
-    if expression or len(expression)>0:
-        response_object['result'] = str(eval(expression['expression'],{},{}))
+    try:
+        expression = request.get_json()
+        response_object = {'status': 'success'}
+        response_object['data'] = "Start using server!"
+        response_object['info'] = "/api/help for more details"
+        if len(expression)>0:
+            response_object['result'] = str(eval(expression['expression'],{},{}))
+    except Exception as e:
+        response_object = {'status': 'fail'}
+        response_object['data'] = e
     return jsonify(response_object)
 
 #region get routes
