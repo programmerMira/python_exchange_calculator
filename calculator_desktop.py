@@ -24,16 +24,13 @@ ERROR_MSG = 'ERROR'
 # Create a Model to handle the calculator's operation
 def evaluateExpression(expression):
     """Evaluate an expression."""
-    try:
-        result = str(eval(expression, {}, {}))
-    except Exception:
-        result = ERROR_MSG
     try:    
         request = requests.get("https://calculator-2021.herokuapp.com/",headers={'Content-Type': 'application/json'}, data=json.dumps({'expression': expression}))
         if request.status_code==200:
-            print(request.text)
+            result = json.loads(request.text)['result']
     except Exception as e:
         print(e)
+        result = ERROR_MSG
 
     return result
 
