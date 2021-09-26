@@ -26,7 +26,7 @@ def hello():
     return jsonify(response_object)
 
 #region get routes
-@app.route('/',method=['GET'])
+@app.route('/',methods=['GET'])
 def help():
     response_object = {'status': 'success'}
     response_object['/api'] = "post method with json: {'expression':'2-3+7...'}, returns json: {...'result':'number',...}"
