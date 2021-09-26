@@ -15,7 +15,7 @@ calculator = Calculations()
 # enable CORS
 CORS(app)
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET','POST'])
 def hello():
     expression = request.get_json()
     response_object = {'status': 'success'}
