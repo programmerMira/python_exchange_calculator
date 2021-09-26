@@ -15,7 +15,7 @@ calculator = Calculations()
 # enable CORS
 CORS(app)
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/api', methods=['GET','POST'])
 def hello():
     response_object = {'status': 'success'}
     response_object['data'] = "Start using server!"
@@ -75,10 +75,10 @@ def api_root(first,second):
     response_object['info'] = "/api/help for more details"
     return jsonify(response_object)
 
-@app.route('/api/help', methods=['GET'])
+@app.route('/',method=['GET']
 def help():
     response_object = {'status': 'success'}
-    response_object['/'] = "post method with json: {'expression':'2-3+7...'}, returns json: {...'result':'number',...}"
+    response_object['/api'] = "post method with json: {'expression':'2-3+7...'}, returns json: {...'result':'number',...}"
     response_object['addition'] = "get method, url: /api/addition/<first_number>/<second_number>, returns json: {...'result':'number',...}"
     response_object['substraction'] = "get method, url: /api/substraction/<first_number>/<second_number>, returns json: {...'result':'number',...}"
     response_object['multiplication'] = "get method, url: /api/multiplication/<first_number>/<second_number>, returns json: {...'result':'number',...}"
@@ -87,4 +87,7 @@ def help():
     response_object['power'] = "get method, url: /api/power/<first_number>/<second_number>, returns json: {...'result':'number',...}"
     response_object['root'] = "get method, url: /api/root/<first_number>/<second_number>, returns json: {...'result':'number',...}"
     return jsonify(response_object)
+
+@app.route('/api/help', methods=['GET'])
+help()
 #endregion
