@@ -2,6 +2,7 @@
 
 import sys
 import requests
+import json
 
 # Import QApplication and the required widgets from PyQt5.QtWidgets
 from PyQt5.QtWidgets import QApplication
@@ -25,11 +26,14 @@ def evaluateExpression(expression):
     """Evaluate an expression."""
     try:
         result = str(eval(expression, {}, {}))
+    except Exception:
+        result = ERROR_MSG
+    try:    
         request = requests.get("https://calculator-2021.herokuapp.com/",headers={'Content-Type': 'application/json'}, data=json.dumps({'expression': expression}))
         if request.status_code==200:
             print(request.text)
-    except Exception:
-        result = ERROR_MSG
+    except Exception as e:
+        print(e)
 
     return result
 
