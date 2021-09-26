@@ -20,7 +20,7 @@ def hello():
     expression = request.get_json()
     response_object = {'status': 'success'}
     response_object['data'] = "Start using server!"
-    response_object['result'] = str(expression)
+    response_object['result'] = expression#str(eval(expression,{},{}))
     return jsonify(response_object)
 
 #region get routes
