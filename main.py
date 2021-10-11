@@ -21,14 +21,14 @@ def hello():
         response_object = {'status': 'success'}
         response_object['data'] = "Start using server!"
         response_object['info'] = "/api/help for more details"
-        if flask.request.method=='POST':
-            expression = request.get_json()
-            response_object['result'] = str(eval(expression['expression'],{},{}))
+        expression = request.get_json()
+        response_object['result'] = str(eval(expression['expression'],{},{}))
         return jsonify(response_object)
     except Exception as e:
         response_object = {'status':'fail'}
+        expression = request.get_json()
         response_object['data'] = expression
-        response_object['error']=e
+        print("ERROR:",e)
         return jsonify(response_object)
         
 
