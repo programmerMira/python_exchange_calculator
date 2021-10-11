@@ -28,6 +28,8 @@ def evaluateExpression(expression):
         request = requests.get("https://calculator-2021.herokuapp.com/api",headers={'Content-Type': 'application/json'}, data=json.dumps({'expression': expression}))
         if request.status_code==200:
             result = json.loads(request.text)['result']
+        else:
+            result = "ERROR 404"
     except Exception as e:
         print(e)
         result = ERROR_MSG
