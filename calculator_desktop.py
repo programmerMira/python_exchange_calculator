@@ -30,8 +30,8 @@ def evaluateExpression(expression):
             result = json.loads(request.text)['result']
         else:
             result = "Server error"
-            print(json.loads(request.text)['error'])
-            print(json.loads(request.text)['data'])
+            print("Error:",json.loads(request.text)['error'])
+            print("data:",json.loads(request.text)['data'])
     except Exception as e:
         print(e)
         result = ERROR_MSG
