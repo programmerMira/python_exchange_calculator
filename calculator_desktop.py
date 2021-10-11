@@ -25,7 +25,7 @@ ERROR_MSG = 'ERROR'
 def evaluateExpression(expression):
     """Evaluate an expression."""
     try:    
-        request = requests.get("https://calculator-2021.herokuapp.com/api",headers={'Content-Type': 'application/json'}, data=json.dumps({'expression': expression}))
+        request = requests.post("https://calculator-2021.herokuapp.com/api",headers={'Content-Type': 'application/json'}, data=json.dumps({'expression': expression}))
         if request.status_code==200:
             result = json.loads(request.text)['result']
         else:
