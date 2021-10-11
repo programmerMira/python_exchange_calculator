@@ -17,13 +17,19 @@ CORS(app)
 
 @app.route('/api', methods=['GET','POST'])
 def hello():
-    response_object = {'status': 'success'}
-    response_object['data'] = "Start using server!"
-    response_object['info'] = "/api/help for more details"
-    if flask.request.method=='POST':
-        expression = request.get_json()
-        response_object['result'] = str(eval(expression['expression'],{},{}))
-    return jsonify(response_object)
+    try:
+        response_object = {'status': 'success'}
+        response_object['data'] = "Start using server!"
+        response_object['info'] = "/api/help for more details"
+        if flask.request.method=='POST':
+            expression = request.get_json()
+            response_object['result'] = str(eval(expression['expression'],{},{}))
+        return jsonify(response_object)
+    except Exception as e:
+        response_object = {'status':'fail'}
+        response_object['error']=e
+        return jsonify(response_object)
+        
 
 #region get routes
 @app.route('/',methods=['GET'])
