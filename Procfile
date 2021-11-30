@@ -1,1 +1,0 @@
-web: gunicorn calculator_server:app
