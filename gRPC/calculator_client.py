@@ -48,3 +48,6 @@ if __name__ == '__main__':
         result = client.get_url(message=message)
         print("Server reply")
         print(f'{result}')
+        if(result.message == "Auth error"):
+            break
+

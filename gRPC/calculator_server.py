@@ -5,12 +5,10 @@ import calculator.calculator_pb2_grpc as pb2_grpc
 import calculator.calculator_pb2 as pb2
 from users import USERS
 
-LOGGED_IN = True
-
 class CalculatorService(pb2_grpc.UnaryServicer):
 
     def __init__(self, *args, **kwargs):
-        pass
+        LOGGED_IN = False
     
     def AuthentificateUser(self, request, context):
         # get the string from the incoming request
@@ -19,10 +17,10 @@ class CalculatorService(pb2_grpc.UnaryServicer):
         try:
             if login in USERS and USERS[login]==password:
                 result = {'message': "Logged in!", 'logged_in': True}
-                LOGGED_IN = True
+                self.LOGGED_IN = True
             else:
                 result = {'message': "Bad cridentials!", 'logged_in': False}
-                LOGGED_IN = False
+                self.LOGGED_IN = False
         except Exception as e:
             result = f'Recieved expression but error occured: {e}'
             result = {'message': result, 'logged_in': False}
@@ -30,7 +28,7 @@ class CalculatorService(pb2_grpc.UnaryServicer):
             return pb2.UserResponse(**result)
 
     def GetServerResponse(self, request, context):
-        if LOGGED_IN:
+        if self.LOGGED_IN:
             # get the string from the incoming request
             message = request.message
             try:
